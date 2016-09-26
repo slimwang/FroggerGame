@@ -40,14 +40,23 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x = 101 * 2;
-    this.y = 403;
+    this.initLoc();
     this.width = 50;
     this.height = 40;
 };
 
-Player.prototype.update = function(dt) {
+Player.prototype.initLoc = function() {
+    this.x = this.x = 101 * 2;
+    this.y = 403;
+};
 
+Player.prototype.update = function(dt) {
+  allEnemies.forEach(function(enemy){
+    if(player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
+       player.y < enemy.y + enemy.height && player.y + player.height >enemy.y){
+         player.initLoc();
+       }
+  });
 };
 
 Player.prototype.render = function() {
