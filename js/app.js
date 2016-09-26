@@ -7,13 +7,13 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     //Make sure the enemeis only occur in the proper rows
-    var randomRow = Math.floor(Math.random() * 4) + 1;
-    this.generateRandomSpeed = function(){
-      return Math.floor(Math.random() * 200) + 100;
-    };
+    this.randomRow = function() {return Math.floor(Math.random() * 3) + 1;};
+    this.randomSpeed = function() {return Math.floor(Math.random() * 200) + 100;};
     this.x = -101;
-    this.y = randomRow * 83 - 23;
-    this.speed = this.generateRandomSpeed();
+    this.y = this.randomRow() * 83 - 23;
+    this.speed = this.randomSpeed();
+    this.width = 100;
+    this.height = 80;
 };
 
 // Update the enemy's position, required method for game
@@ -24,6 +24,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + this.speed * dt;
     if(this.x > 404){
+      this.y = this.randomRow() * 83 - 23;
+      this.speed = this.randomSpeed();
       this.x = -101;
     }
 };
@@ -40,6 +42,8 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 101 * 2;
     this.y = 403;
+    this.width = 100;
+    this.height = 80;
 };
 
 Player.prototype.update = function(dt) {
