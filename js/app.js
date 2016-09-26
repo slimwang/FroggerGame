@@ -11,6 +11,7 @@ var Enemy = function() {
     this.randomSpeed = function() {return Math.floor(Math.random() * 200) + 100;};
     this.width = 100;
     this.height = 80;
+    //Setting the Enemy initial location
     this.initLocAndSpeed();
 };
 
@@ -41,9 +42,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.initLoc();
     this.width = 50;
     this.height = 40;
+    this.initLoc();
 };
 
 Player.prototype.initLoc = function() {
@@ -52,6 +53,7 @@ Player.prototype.initLoc = function() {
 };
 
 Player.prototype.update = function(dt) {
+  //collision detection
   allEnemies.forEach(function(enemy){
     if(player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
        player.y < enemy.y + enemy.height && player.y + player.height >enemy.y){
