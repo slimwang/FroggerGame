@@ -42,8 +42,8 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 101 * 2;
     this.y = 403;
-    this.width = 100;
-    this.height = 80;
+    this.width = 50;
+    this.height = 40;
 };
 
 Player.prototype.update = function(dt) {
