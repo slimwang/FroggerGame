@@ -7,13 +7,14 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     //Make sure the enemeis only occur in the proper rows
-    this.randomRow = function() {return Math.floor(Math.random() * 3) + 1;};
-    this.randomSpeed = function() {return Math.floor(Math.random() * 200) + 100;};
     this.width = 100;
     this.height = 80;
     //Setting the Enemy initial location
     this.initLocAndSpeed();
 };
+
+Enemy.prototype.randomRow = function() {return Math.floor(Math.random() * 3) + 1;};
+Enemy.prototype.randomSpeed = function() {return Math.floor(Math.random() * 200) + 100;};
 
 Enemy.prototype.initLocAndSpeed = function() {
     this.x = -101;
@@ -27,7 +28,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed * dt;
-    if(this.x > 404){
+    if(this.x > canvas.width){
       this.initLocAndSpeed();
     }
 };
@@ -53,13 +54,6 @@ Player.prototype.initLoc = function() {
 };
 
 Player.prototype.update = function(dt) {
-  //collision detection
-  allEnemies.forEach(function(enemy){
-    if(player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
-       player.y < enemy.y + enemy.height && player.y + player.height >enemy.y){
-         player.initLoc();
-       }
-  });
 };
 
 Player.prototype.render = function() {
@@ -69,10 +63,10 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(key) {
     switch (key) {
         case 'left':
-            if (player.x !== 0) this.x -= 101;
+            if (this.x !== 0) this.x -= 101;
             break;
         case 'up':
-            if (player.y == 71) {
+            if (this.y == 71) {
                 this.x = 101 * 2;
                 this.y = 403;
             } else {
@@ -80,10 +74,10 @@ Player.prototype.handleInput = function(key) {
             }
             break;
         case 'right':
-            if (player.x !== 404) this.x += 101;
+            if (this.x !== 404) this.x += 101;
             break;
         case 'down':
-            if (player.y !== 403) this.y += 83;
+            if (this.y !== 403) this.y += 83;
             break;
     }
 };
